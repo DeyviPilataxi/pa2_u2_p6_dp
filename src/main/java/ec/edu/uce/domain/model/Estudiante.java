@@ -32,6 +32,9 @@ public class Estudiante {
     @Column(name = "estu_fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
+    @Column(name = "estu_cedula")
+    private String cedula;
+
     public Integer getId() {
         return id;
     }
@@ -70,6 +73,20 @@ public class Estudiante {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", genero=" + genero
+                + ", fechaNacimiento=" + fechaNacimiento + ", cedula=" + cedula + "]";
     }
 
 }

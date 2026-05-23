@@ -1,6 +1,7 @@
 package ec.edu.uce;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import ec.edu.uce.application.service.EstudianteService;
 import ec.edu.uce.application.service.ProfesorService;
@@ -25,10 +26,10 @@ public class Main {
     @ApplicationScoped
     public static class App implements QuarkusApplication {
 
-        // @Inject
-        // private EstudianteService estudianteService;
         @Inject
-        private ProfesorService profesorService;
+        private EstudianteService estudianteService;
+        // @Inject
+        // private ProfesorService profesorService;
 
         @Override
 
@@ -75,48 +76,91 @@ public class Main {
              * System.out.println("estudiante eliminado");
              */
 
-            Profesor prof = new Profesor();
-            prof.setNombre("Julian");
-            prof.setApellido("Alvarez");
-            prof.setFechaNacimiento(LocalDate.of(2001, 07, 12));
-            prof.setGenero("M");
-            this.profesorService.guardar(prof);
+            /*
+             * Profesor prof = new Profesor();
+             * prof.setNombre("Julian");
+             * prof.setApellido("Alvarez");
+             * prof.setFechaNacimiento(LocalDate.of(2001, 07, 12));
+             * prof.setGenero("M");
+             * this.profesorService.guardar(prof);
+             * 
+             * Profesor prof1 = new Profesor();
+             * prof1.setNombre("Enrique");
+             * prof1.setApellido("Kaviedes");
+             * prof1.setFechaNacimiento(LocalDate.of(1998, 03, 06));
+             * prof1.setGenero("M");
+             * this.profesorService.guardar(prof1);
+             * 
+             * this.profesorService.buscarPorId(1);
+             * 
+             * if (prof != null) {
+             * System.out.println("Profesor encontrado con éxito:");
+             * System.out.println("Nombre: " + prof.getNombre());
+             * System.out.println("Apellido: " + prof.getApellido());
+             * System.out.println("Género: " + prof.getGenero());
+             * } else {
+             * System.out.println("No se encontró ningún profesor ");
+             * 
+             * }
+             * 
+             * System.out.println("Actualizar");
+             * 
+             * Profesor prof2 = this.profesorService.buscarPorId(1);
+             * 
+             * if (prof2 != null) {
+             * 
+             * prof2.setApellido("profesor Cambiado");
+             * 
+             * this.profesorService.actualizar(prof2);
+             * System.out.println("Apellido actualizado con éxito.");
+             * } else {
+             * System.out.println("No se encontró el profesor para actualizar.");
+             * }
+             * 
+             * this.profesorService.eliminar(2);
+             * System.out.println("profesor eliminado");
+             */
 
-            Profesor prof1 = new Profesor();
-            prof1.setNombre("Enrique");
-            prof1.setApellido("Kaviedes");
-            prof1.setFechaNacimiento(LocalDate.of(1998, 03, 06));
-            prof1.setGenero("M");
-            this.profesorService.guardar(prof1);
+            /*
+             * List<Estudiante> estudiantes = this.estudianteService.seleccionarTodos();
+             * System.out.println("Lista de estudiantes:");
+             * if (estudiantes != null && !estudiantes.isEmpty()) {
+             * for (Estudiante estudiante : estudiantes) {
+             * System.out.println("Nombre: " + estudiante.getNombre() + ", Apellido: " +
+             * estudiante.getApellido());
+             * }
+             * } else {
+             * System.out.println("No hay estudiantes registrados.");
+             * }
+             */
 
-            this.profesorService.buscarPorId(1);
-
-            if (prof != null) {
-                System.out.println("Profesor encontrado con éxito:");
-                System.out.println("Nombre: " + prof.getNombre());
-                System.out.println("Apellido: " + prof.getApellido());
-                System.out.println("Género: " + prof.getGenero());
-            } else {
-                System.out.println("No se encontró ningún profesor ");
-
+            List<Estudiante> estudiantes = this.estudianteService.seleccionarTodos();
+            System.out.println("Lista de estudiantes:");
+            for (Estudiante est : estudiantes) {
+                System.out.println("- " + est.getNombre() + " " + est.getApellido());
             }
 
-            System.out.println("Actualizar");
-
-            Profesor prof2 = this.profesorService.buscarPorId(1);
-
-            if (prof2 != null) {
-
-                prof2.setApellido("profesor Cambiado");
-
-                this.profesorService.actualizar(prof2);
-                System.out.println("Apellido actualizado con éxito.");
-            } else {
-                System.out.println("No se encontró el profesor para actualizar.");
+            /*
+             * List<Estudiante> estudiantesPorNombre =
+             * this.estudianteService.seleccionarPorNombre("Deyvi");
+             * System.out.println("Estudiantes con el nombre 'Deyvi':");
+             * for (Estudiante est : estudiantesPorNombre) {
+             * System.out.println("- " + est.getNombre() + " " + est.getApellido());
+             * }
+             */
+            List<Estudiante> estudiantesPorNombre = this.estudianteService.seleccionarPorNombre("deyvi");
+            System.out.println("Estudiantes con el nombre 'deyvi':");
+            for (Estudiante est : estudiantesPorNombre) {
+                System.out.println("- " + est.getNombre() + " " + est.getApellido());
             }
 
-            this.profesorService.eliminar(2);
-            System.out.println("estudiante eliminado");
+            Estudiante estudiantePorCedula = this.estudianteService.seleccionarPorCedula("1234567890");
+            if (estudiantePorCedula != null) {
+                System.out.println("Estudiante encontrado con cédula :");
+                System.out.println("- " + estudiantePorCedula.getNombre() + " " + estudiantePorCedula.getApellido());
+            } else {
+                System.out.println("No se encontró ningún estudiante con la cédula '1723456789'.");
+            }
 
             return 0;
 
