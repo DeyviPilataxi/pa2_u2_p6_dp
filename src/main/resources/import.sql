@@ -25,3 +25,38 @@ VALUES (nextval('seq_estudiante'),
   'F',
   '2000-07-13',
   '0608377490');
+
+INSERT INTO profesor (prof_id, 
+prof_nombre, 
+prof_correo, 
+prof_telefono, 
+prof_direccion)
+VALUES (nextval('seq_profesor'), 
+'Mathias Pilataxi', 
+'mathias@uce.edu.ec', 
+'0991234567', 
+'Quito Sur');
+
+
+INSERT INTO profesor (prof_id, 
+prof_nombre, 
+prof_correo, 
+prof_telefono, 
+prof_direccion)
+VALUES (nextval('seq_profesor'), 
+'German Sinche', 
+'german@uce.edu.ec', 
+'0987654321', 
+'Centro Histórico');
+
+
+INSERT INTO profesor (prof_id, 
+prof_nombre, 
+prof_correo, 
+prof_telefono, 
+prof_direccion)
+VALUES (nextval('seq_profesor'), 
+'Priscila Maria Guaiña', 
+'priscila@uce.edu.ec', 
+NULL, 
+'El Condado');

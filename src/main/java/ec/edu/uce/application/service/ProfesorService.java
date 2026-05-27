@@ -1,5 +1,7 @@
 package ec.edu.uce.application.service;
 
+import java.util.List;
+
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.model.Profesor;
 import ec.edu.uce.domain.repository.ProfesorRepository;
@@ -33,4 +35,15 @@ public class ProfesorService {
         this.profesorRepository.actualizar(profesor);
     }
 
+    public List<Profesor> seleccionarPorNombreLike(String nombre) {
+        return this.profesorRepository.seleccionarPorNombreLike(nombre);
+    }
+
+    public List<Profesor> seleccionarConTelefonoRegistrado() {
+        return this.profesorRepository.seleccionarConTelefonoRegistrado();
+    }
+
+    public List<Profesor> seleccionarPorRangoId(Integer idInicio, Integer idFin) {
+        return this.profesorRepository.seleccionarPorRangoId(idInicio, idFin);
+    }
 }

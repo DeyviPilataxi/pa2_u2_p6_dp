@@ -23,14 +23,14 @@ public class Profesor {
     @Column(name = "prof_nombre")
     private String nombre;
 
-    @Column(name = "prof_apellido")
-    private String apellido;
+    @Column(name = "prof_correo")
+    private String correo;
 
-    @Column(name = "prof_genero")
-    private String genero;
+    @Column(name = "prof_telefono")
+    private String telefono;
 
-    @Column(name = "prof_fecha_nacimiento")
-    private LocalDate fechaNacimiento;
+    @Column(name = "prof_direccion")
+    private String direccion;
 
     public Integer getId() {
         return id;
@@ -48,28 +48,34 @@ public class Profesor {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    @Override
+    public String toString() {
+        return "Profesor [id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono
+                + ", direccion=" + direccion + "]";
     }
 
 }

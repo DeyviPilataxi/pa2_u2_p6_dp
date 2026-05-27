@@ -26,10 +26,10 @@ public class Main {
     @ApplicationScoped
     public static class App implements QuarkusApplication {
 
-        @Inject
-        private EstudianteService estudianteService;
         // @Inject
-        // private ProfesorService profesorService;
+        // private EstudianteService estudianteService;
+        @Inject
+        private ProfesorService profesorService;
 
         @Override
 
@@ -134,11 +134,13 @@ public class Main {
              * }
              */
 
-            List<Estudiante> estudiantes = this.estudianteService.seleccionarTodos();
-            System.out.println("Lista de estudiantes:");
-            for (Estudiante est : estudiantes) {
-                System.out.println("- " + est.getNombre() + " " + est.getApellido());
-            }
+            /*
+             * List<Estudiante> estudiantes = this.estudianteService.seleccionarTodos();
+             * System.out.println("Lista de estudiantes:");
+             * for (Estudiante est : estudiantes) {
+             * System.out.println("- " + est.getNombre() + " " + est.getApellido());
+             * }
+             */
 
             /*
              * List<Estudiante> estudiantesPorNombre =
@@ -148,18 +150,44 @@ public class Main {
              * System.out.println("- " + est.getNombre() + " " + est.getApellido());
              * }
              */
-            List<Estudiante> estudiantesPorNombre = this.estudianteService.seleccionarPorNombre("deyvi");
-            System.out.println("Estudiantes con el nombre 'deyvi':");
-            for (Estudiante est : estudiantesPorNombre) {
-                System.out.println("- " + est.getNombre() + " " + est.getApellido());
+            /*
+             * List<Estudiante> estudiantesPorNombre =
+             * this.estudianteService.seleccionarPorNombre("deyvi");
+             * System.out.println("Estudiantes con el nombre 'deyvi':");
+             * for (Estudiante est : estudiantesPorNombre) {
+             * System.out.println("- " + est.getNombre() + " " + est.getApellido());
+             * }
+             * 
+             * Estudiante estudiantePorCedula =
+             * this.estudianteService.seleccionarPorCedula("1234567890");
+             * if (estudiantePorCedula != null) {
+             * System.out.println("Estudiante encontrado con cédula :");
+             * System.out.println("- " + estudiantePorCedula.getNombre() + " " +
+             * estudiantePorCedula.getApellido());
+             * } else {
+             * System.out.
+             * println("No se encontró ningún estudiante con la cédula '1723456789'.");
+             * }
+             * 
+             */
+
+            String nombreBuscar = "ma";
+            List<Profesor> profesoresPorNombre = this.profesorService.seleccionarPorNombreLike(nombreBuscar);
+            System.out.println("\nProfesores que coinciden con '" + nombreBuscar + "' (LIKE):");
+            for (Profesor prof : profesoresPorNombre) {
+                System.out.println(prof);
             }
 
-            Estudiante estudiantePorCedula = this.estudianteService.seleccionarPorCedula("1234567890");
-            if (estudiantePorCedula != null) {
-                System.out.println("Estudiante encontrado con cédula :");
-                System.out.println("- " + estudiantePorCedula.getNombre() + " " + estudiantePorCedula.getApellido());
-            } else {
-                System.out.println("No se encontró ningún estudiante con la cédula '1723456789'.");
+            List<Profesor> profesoresConTelefono = this.profesorService.seleccionarConTelefonoRegistrado();
+            System.out.println("\nProfesores que SI tienen un teléfono registrado:");
+            for (Profesor prof : profesoresConTelefono) {
+                System.out.println(prof);
+            }
+
+            List<Profesor> profesoresPorRango = this.profesorService.seleccionarPorRangoId(1, 5);
+            System.out.println("\nProfesores en el rango de Ids de 1 a 5 :");
+            for (Profesor prof : profesoresPorRango) {
+                System.out.println(prof);
             }
 
             return 0;
