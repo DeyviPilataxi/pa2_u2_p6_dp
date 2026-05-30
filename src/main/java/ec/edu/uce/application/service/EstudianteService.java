@@ -64,4 +64,8 @@ public class EstudianteService {
         return this.estudianteRepository.SeleccionarContar();
     }
 
+    public List<Estudiante> seleccionarTodosNative() {
+        return this.estudianteRepository.seleccionarTodosNative();
+    }
+
 }

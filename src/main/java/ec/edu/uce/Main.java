@@ -217,6 +217,12 @@ public class Main {
             Long totalEstudiantes = this.estudianteService.seleccionarContar();
             System.out.println("\nTotal de estudiantes registrados: " + totalEstudiantes);
 
+            List<Estudiante> estudiantesNative = this.estudianteService.seleccionarTodosNative();
+            System.out.println("\nEstudiantes obtenidos con consulta native:");
+            for (Estudiante est : estudiantesNative) {
+                System.out.println(est);
+            }
+
             return 0;
 
         }

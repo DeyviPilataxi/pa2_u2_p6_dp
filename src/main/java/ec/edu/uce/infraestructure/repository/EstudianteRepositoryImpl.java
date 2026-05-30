@@ -105,4 +105,13 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 
     }
 
+    // NativeQuery
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Estudiante> seleccionarTodosNative() {
+        Query miQuery = this.em.createNativeQuery("SELECT * FROM estudiante", Estudiante.class);
+        return miQuery.getResultList();
+    }
+
 }
