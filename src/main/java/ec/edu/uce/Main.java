@@ -26,10 +26,10 @@ public class Main {
     @ApplicationScoped
     public static class App implements QuarkusApplication {
 
-        // @Inject
-        // private EstudianteService estudianteService;
         @Inject
-        private ProfesorService profesorService;
+        private EstudianteService estudianteService;
+        // @Inject
+        // private ProfesorService profesorService;
 
         @Override
 
@@ -147,7 +147,7 @@ public class Main {
              * this.estudianteService.seleccionarPorNombre("Deyvi");
              * System.out.println("Estudiantes con el nombre 'Deyvi':");
              * for (Estudiante est : estudiantesPorNombre) {
-             * System.out.println("- " + est.getNombre() + " " + est.getApellido());
+             * System.out.println(est);
              * }
              */
             /*
@@ -155,15 +155,14 @@ public class Main {
              * this.estudianteService.seleccionarPorNombre("deyvi");
              * System.out.println("Estudiantes con el nombre 'deyvi':");
              * for (Estudiante est : estudiantesPorNombre) {
-             * System.out.println("- " + est.getNombre() + " " + est.getApellido());
+             * System.out.println(est);
              * }
              * 
              * Estudiante estudiantePorCedula =
              * this.estudianteService.seleccionarPorCedula("1234567890");
              * if (estudiantePorCedula != null) {
              * System.out.println("Estudiante encontrado con cédula :");
-             * System.out.println("- " + estudiantePorCedula.getNombre() + " " +
-             * estudiantePorCedula.getApellido());
+             * System.out.println(est);
              * } else {
              * System.out.
              * println("No se encontró ningún estudiante con la cédula '1723456789'.");
@@ -171,24 +170,52 @@ public class Main {
              * 
              */
 
-            String nombreBuscar = "ma";
-            List<Profesor> profesoresPorNombre = this.profesorService.seleccionarPorNombreLike(nombreBuscar);
-            System.out.println("\nProfesores que coinciden con '" + nombreBuscar + "' (LIKE):");
-            for (Profesor prof : profesoresPorNombre) {
-                System.out.println(prof);
+            /*
+             * String nombreBuscar = "ma";
+             * List<Profesor> profesoresPorNombre =
+             * this.profesorService.seleccionarPorNombreLike(nombreBuscar);
+             * System.out.println("\nProfesores que coinciden con '" + nombreBuscar +
+             * "' (LIKE):");
+             * for (Profesor prof : profesoresPorNombre) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> profesoresConTelefono =
+             * this.profesorService.seleccionarConTelefonoRegistrado();
+             * System.out.println("\nProfesores que SI tienen un teléfono registrado:");
+             * for (Profesor prof : profesoresConTelefono) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> profesoresPorRango =
+             * this.profesorService.seleccionarPorRangoId(1, 5);
+             * System.out.println("\nProfesores en el rango de Ids de 1 a 5 :");
+             * for (Profesor prof : profesoresPorRango) {
+             * System.out.println(prof);
+             * }
+             */
+
+            List<Estudiante> estudiantesPorGenero = this.estudianteService.seleccionarPorGenero("M");
+            System.out.println("\nEstudiantes con género 'M':");
+            for (Estudiante est : estudiantesPorGenero) {
+                System.out.println(est);
             }
 
-            List<Profesor> profesoresConTelefono = this.profesorService.seleccionarConTelefonoRegistrado();
-            System.out.println("\nProfesores que SI tienen un teléfono registrado:");
-            for (Profesor prof : profesoresConTelefono) {
-                System.out.println(prof);
+            List<Estudiante> estudiantesPorGeneroTyped = this.estudianteService.seleccionarPorGeneroTyped("F");
+            System.out.println("\nEstudiantes con género 'F' (TypedQuery):");
+            for (Estudiante est : estudiantesPorGeneroTyped) {
+                System.out.println(est);
             }
 
-            List<Profesor> profesoresPorRango = this.profesorService.seleccionarPorRangoId(1, 5);
-            System.out.println("\nProfesores en el rango de Ids de 1 a 5 :");
-            for (Profesor prof : profesoresPorRango) {
-                System.out.println(prof);
+            List<Estudiante> estudiantesPorRangoFechas = this.estudianteService
+                    .seleccionarPorRangosFechas(LocalDate.of(2000, 03, 21), LocalDate.of(2001, 06, 25));
+            System.out.println("\nEstudiantes nacidos entre 2000 y 2001:");
+            for (Estudiante est : estudiantesPorRangoFechas) {
+                System.out.println(est);
             }
+
+            Long totalEstudiantes = this.estudianteService.seleccionarContar();
+            System.out.println("\nTotal de estudiantes registrados: " + totalEstudiantes);
 
             return 0;
 
