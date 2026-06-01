@@ -7,11 +7,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.NamedQueries;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "profesor")
+@NamedQueries({
+        @NamedQuery(name = "Profesor.buscarPorNombre", query = "SELECT e FROM Profesor e WHERE e.nombre = :nombre"),
+        @NamedQuery(name = "Profesor.buscarPorTelefono", query = "SELECT e FROM Profesor e WHERE e.telefono = :telefono"),
+        @NamedQuery(name = "Profesor.buscarPorDireccion", query = "SELECT e FROM Profesor e WHERE e.direccion = :direccion"),
+        @NamedQuery(name = "Profesor.contar", query = "SELECT COUNT(e) FROM Profesor e ")
+
+})
 public class Profesor {
 
     @Id

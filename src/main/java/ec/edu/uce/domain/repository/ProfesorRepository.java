@@ -20,4 +20,12 @@ public interface ProfesorRepository {
 
     public List<Profesor> seleccionarPorRangoId(Integer idInicio, Integer idFin);
 
+    public List<Profesor> seleccionarPorNombre(String nombre);
+
+    public List<Profesor> seleccionarPorDireccion(String direccion);
+
+    public List<Profesor> seleccionarPorTelefono(String telefono);
+
+    public Long contarProfesores();
+
 }

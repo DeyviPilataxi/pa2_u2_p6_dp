@@ -26,10 +26,10 @@ public class Main {
     @ApplicationScoped
     public static class App implements QuarkusApplication {
 
-        @Inject
-        private EstudianteService estudianteService;
         // @Inject
-        // private ProfesorService profesorService;
+        // private EstudianteService estudianteService;
+        @Inject
+        private ProfesorService profesorService;
 
         @Override
 
@@ -195,32 +195,58 @@ public class Main {
              * }
              */
 
-            List<Estudiante> estudiantesPorGenero = this.estudianteService.seleccionarPorGenero("M");
-            System.out.println("\nEstudiantes con género 'M':");
-            for (Estudiante est : estudiantesPorGenero) {
-                System.out.println(est);
+            /*
+             * //metoodos de typed y named query
+             * List<Estudiante> estudiantesPorGenero =
+             * this.estudianteService.seleccionarPorGenero("M");
+             * System.out.println("\nEstudiantes con género 'M':");
+             * for (Estudiante est : estudiantesPorGenero) {
+             * System.out.println(est);
+             * }
+             * 
+             * List<Estudiante> estudiantesPorGeneroTyped =
+             * this.estudianteService.seleccionarPorGeneroTyped("F");
+             * System.out.println("\nEstudiantes con género 'F' (TypedQuery):");
+             * for (Estudiante est : estudiantesPorGeneroTyped) {
+             * System.out.println(est);
+             * }
+             * 
+             * List<Estudiante> estudiantesPorRangoFechas = this.estudianteService
+             * .seleccionarPorRangosFechas(LocalDate.of(2000, 03, 21), LocalDate.of(2001,
+             * 06, 25));
+             * System.out.println("\nEstudiantes nacidos entre 2000 y 2001:");
+             * for (Estudiante est : estudiantesPorRangoFechas) {
+             * System.out.println(est);
+             * }
+             * 
+             * Long totalEstudiantes = this.estudianteService.seleccionarContar();
+             * System.out.println("\nTotal de estudiantes registrados: " +
+             * totalEstudiantes);
+             * 
+             * List<Estudiante> estudiantesNative =
+             * this.estudianteService.seleccionarTodosNative();
+             * System.out.println("\nEstudiantes obtenidos con consulta native:");
+             * for (Estudiante est : estudiantesNative) {
+             * System.out.println(est);
+             * }
+             */
+
+            List<Profesor> profesoresPorNombre = this.profesorService.seleccionarPorNombre("German Sinche");
+            System.out.println("\nProfesores con el nombre 'German Sinche':");
+            for (Profesor prof : profesoresPorNombre) {
+                System.out.println(prof);
             }
 
-            List<Estudiante> estudiantesPorGeneroTyped = this.estudianteService.seleccionarPorGeneroTyped("F");
-            System.out.println("\nEstudiantes con género 'F' (TypedQuery):");
-            for (Estudiante est : estudiantesPorGeneroTyped) {
-                System.out.println(est);
+            List<Profesor> profesorPorDireccion = this.profesorService.seleccionarPorDireccion("Quito Sur");
+            System.out.println("\nProfesores con la dirección 'Quito Sur':");
+            for (Profesor prof : profesorPorDireccion) {
+                System.out.println(prof);
             }
 
-            List<Estudiante> estudiantesPorRangoFechas = this.estudianteService
-                    .seleccionarPorRangosFechas(LocalDate.of(2000, 03, 21), LocalDate.of(2001, 06, 25));
-            System.out.println("\nEstudiantes nacidos entre 2000 y 2001:");
-            for (Estudiante est : estudiantesPorRangoFechas) {
-                System.out.println(est);
-            }
-
-            Long totalEstudiantes = this.estudianteService.seleccionarContar();
-            System.out.println("\nTotal de estudiantes registrados: " + totalEstudiantes);
-
-            List<Estudiante> estudiantesNative = this.estudianteService.seleccionarTodosNative();
-            System.out.println("\nEstudiantes obtenidos con consulta native:");
-            for (Estudiante est : estudiantesNative) {
-                System.out.println(est);
+            List<Profesor> profesorPorTelefono = this.profesorService.seleccionarPorTelefono("0987654321");
+            System.out.println("\nProfesores con el teléfono '0987654321':");
+            for (Profesor prof : profesorPorTelefono) {
+                System.out.println(prof);
             }
 
             return 0;

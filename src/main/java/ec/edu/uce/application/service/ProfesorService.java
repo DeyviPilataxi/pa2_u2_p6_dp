@@ -46,4 +46,21 @@ public class ProfesorService {
     public List<Profesor> seleccionarPorRangoId(Integer idInicio, Integer idFin) {
         return this.profesorRepository.seleccionarPorRangoId(idInicio, idFin);
     }
+
+    public List<Profesor> seleccionarPorNombre(String nombre) {
+        return this.profesorRepository.seleccionarPorNombre(nombre);
+    }
+
+    public List<Profesor> seleccionarPorDireccion(String direccion) {
+        return this.profesorRepository.seleccionarPorDireccion(direccion);
+    }
+
+    public List<Profesor> seleccionarPorTelefono(String telefono) {
+        return this.profesorRepository.seleccionarPorTelefono(telefono);
+    }
+
+    public Long contarProfesores() {
+        return this.profesorRepository.contarProfesores();
+    }
+
 }
