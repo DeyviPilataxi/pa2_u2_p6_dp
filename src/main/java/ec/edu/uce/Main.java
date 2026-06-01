@@ -231,21 +231,47 @@ public class Main {
              * }
              */
 
-            List<Profesor> profesoresPorNombre = this.profesorService.seleccionarPorNombre("German Sinche");
+            /*
+             * List<Profesor> profesoresPorNombre =
+             * this.profesorService.seleccionarPorNombre("German Sinche");
+             * System.out.println("\nProfesores con el nombre 'German Sinche':");
+             * for (Profesor prof : profesoresPorNombre) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> profesorPorDireccion =
+             * this.profesorService.seleccionarPorDireccion("Quito Sur");
+             * System.out.println("\nProfesores con la dirección 'Quito Sur':");
+             * for (Profesor prof : profesorPorDireccion) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> profesorPorTelefono =
+             * this.profesorService.seleccionarPorTelefono("0987654321");
+             * System.out.println("\nProfesores con el teléfono '0987654321':");
+             * for (Profesor prof : profesorPorTelefono) {
+             * System.out.println(prof);
+             * }
+             * 
+             */
+
+            List<Profesor> profesoresNative = this.profesorService.seleccionarProfesoresNative();
+            System.out.println("\nProfesores obtenidos con consulta native:");
+            for (Profesor prof : profesoresNative) {
+                System.out.println(prof);
+            }
+
+            List<Profesor> profesoresPorNombreNative = this.profesorService
+                    .seleccionarProfesoresPorNombreNative("German Sinche");
             System.out.println("\nProfesores con el nombre 'German Sinche':");
-            for (Profesor prof : profesoresPorNombre) {
+            for (Profesor prof : profesoresPorNombreNative) {
                 System.out.println(prof);
             }
 
-            List<Profesor> profesorPorDireccion = this.profesorService.seleccionarPorDireccion("Quito Sur");
+            List<Profesor> profesorPorDireccionNative = this.profesorService
+                    .seleccionarProfesorPorDireccionNative("Quito Sur");
             System.out.println("\nProfesores con la dirección 'Quito Sur':");
-            for (Profesor prof : profesorPorDireccion) {
-                System.out.println(prof);
-            }
-
-            List<Profesor> profesorPorTelefono = this.profesorService.seleccionarPorTelefono("0987654321");
-            System.out.println("\nProfesores con el teléfono '0987654321':");
-            for (Profesor prof : profesorPorTelefono) {
+            for (Profesor prof : profesorPorDireccionNative) {
                 System.out.println(prof);
             }
 

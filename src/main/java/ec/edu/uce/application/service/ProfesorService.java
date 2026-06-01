@@ -63,4 +63,17 @@ public class ProfesorService {
         return this.profesorRepository.contarProfesores();
     }
 
+    // native query
+    public List<Profesor> seleccionarProfesoresNative() {
+        return this.profesorRepository.seleccionarProfesoresNative();
+    }
+
+    public List<Profesor> seleccionarProfesoresPorNombreNative(String nombre) {
+        return this.profesorRepository.seleccionarProfesoresPorNombreNative(nombre);
+    }
+
+    public List<Profesor> seleccionarProfesorPorDireccionNative(String direccion) {
+        return this.profesorRepository.seleccionarProfesorPorDireccionNative(direccion);
+    }
+
 }

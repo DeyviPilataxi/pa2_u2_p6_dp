@@ -93,4 +93,27 @@ public class ProfesorRepositoryImpl implements ProfesorRepository {
         return miQuery.getSingleResult();
     }
 
+    // NATIVE QUERY
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Profesor> seleccionarProfesoresNative() {
+        List<Profesor> resultado = this.em.createNativeQuery("SELECT * FROM profesor", Profesor.class).getResultList();
+        return resultado;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Profesor> seleccionarProfesoresPorNombreNative(String nombre) {
+        List<Profesor> resultado = this.em.createNativeQuery("SELECT * FROM profesor WHERE prof_nombre = :nombre",
+                Profesor.class).setParameter("nombre", nombre).getResultList();
+        return resultado;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Profesor> seleccionarProfesorPorDireccionNative(String direccion) {
+        List<Profesor> resultado = this.em.createNativeQuery("SELECT * FROM profesor WHERE prof_direccion = :direccion",
+                Profesor.class).setParameter("direccion", direccion).getResultList();
+        return resultado;
+    }
 }

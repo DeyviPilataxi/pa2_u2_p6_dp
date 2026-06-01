@@ -28,4 +28,10 @@ public interface ProfesorRepository {
 
     public Long contarProfesores();
 
+    public List<Profesor> seleccionarProfesoresNative();
+
+    public List<Profesor> seleccionarProfesoresPorNombreNative(String nombre);
+
+    public List<Profesor> seleccionarProfesorPorDireccionNative(String direccion);
+
 }
