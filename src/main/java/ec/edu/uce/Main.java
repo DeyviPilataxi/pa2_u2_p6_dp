@@ -26,10 +26,10 @@ public class Main {
     @ApplicationScoped
     public static class App implements QuarkusApplication {
 
-        // @Inject
-        // private EstudianteService estudianteService;
         @Inject
-        private ProfesorService profesorService;
+        private EstudianteService estudianteService;
+        // @Inject
+        // private ProfesorService profesorService;
 
         @Override
 
@@ -255,24 +255,69 @@ public class Main {
              * 
              */
 
-            List<Profesor> profesoresNative = this.profesorService.seleccionarProfesoresNative();
-            System.out.println("\nProfesores obtenidos con consulta native:");
-            for (Profesor prof : profesoresNative) {
-                System.out.println(prof);
+            /*
+             * List<Profesor> profesoresNative =
+             * this.profesorService.seleccionarProfesoresNative();
+             * System.out.println("\nProfesores obtenidos con consulta native:");
+             * for (Profesor prof : profesoresNative) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> profesoresPorNombreNative = this.profesorService
+             * .seleccionarProfesoresPorNombreNative("German Sinche");
+             * System.out.println("\nProfesores con el nombre 'German Sinche':");
+             * for (Profesor prof : profesoresPorNombreNative) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> profesorPorDireccionNative = this.profesorService
+             * .seleccionarProfesorPorDireccionNative("Quito Sur");
+             * System.out.println("\nProfesores con la dirección 'Quito Sur':");
+             * for (Profesor prof : profesorPorDireccionNative) {
+             * System.out.println(prof);
+             * }
+             * 
+             */
+
+            List<Estudiante> estudiantesCriteria = this.estudianteService.seleccionarTodosCriteria();
+            System.out.println("\nEstudiantes obtenidos con consulta Criteria API:");
+            for (Estudiante est : estudiantesCriteria) {
+                System.out.println(est);
             }
 
-            List<Profesor> profesoresPorNombreNative = this.profesorService
-                    .seleccionarProfesoresPorNombreNative("German Sinche");
-            System.out.println("\nProfesores con el nombre 'German Sinche':");
-            for (Profesor prof : profesoresPorNombreNative) {
-                System.out.println(prof);
+            List<Estudiante> estudiantesPorNombreCriteria = this.estudianteService
+                    .seleccionarPorNombreCriteria("mishell");
+            System.out.println("\nEstudiantes con el nombre 'mishell' Criteria:");
+            for (Estudiante est : estudiantesPorNombreCriteria) {
+                System.out.println(est);
+            }
+            System.out.println("--------------------------------------------------");
+            List<Estudiante> estudiantesDinamicoCriteria = this.estudianteService
+                    .seleccionarDinamicoCriteria("mishell", "sinche");
+            System.out.println("\nEstudiantes con el nombre 'mishell' y apellido 'sinche' Criteria:");
+            for (Estudiante est : estudiantesDinamicoCriteria) {
+                System.out.println(est);
             }
 
-            List<Profesor> profesorPorDireccionNative = this.profesorService
-                    .seleccionarProfesorPorDireccionNative("Quito Sur");
-            System.out.println("\nProfesores con la dirección 'Quito Sur':");
-            for (Profesor prof : profesorPorDireccionNative) {
-                System.out.println(prof);
+            List<Estudiante> estudiantesDinamicoCriteria2 = this.estudianteService
+                    .seleccionarDinamicoCriteria("mishell", null);
+            System.out.println("\nEstudiantes con el nombre 'mishell' y apellido nulo Criteria:");
+            for (Estudiante est : estudiantesDinamicoCriteria2) {
+                System.out.println(est);
+            }
+
+            List<Estudiante> estudiantesDinamicoCriteria3 = this.estudianteService
+                    .seleccionarDinamicoCriteria(null, "pilataxi");
+            System.out.println("\nEstudiantes con el nombre nulo y apellido 'pilataxi' Criteria:");
+            for (Estudiante est : estudiantesDinamicoCriteria3) {
+                System.out.println(est);
+            }
+
+            List<Estudiante> estudiantesDinamicoCriteria4 = this.estudianteService
+                    .seleccionarDinamicoCriteria(null, null);
+            System.out.println("\nEstudiantes con el nombre y apellido nulos Criteria:");
+            for (Estudiante est : estudiantesDinamicoCriteria4) {
+                System.out.println(est);
             }
 
             return 0;
