@@ -1,6 +1,8 @@
 package ec.edu.uce.infraestructure.repository;
 
+import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.criteria.Predicate;
 
 import javax.swing.text.html.parser.Entity;
 
@@ -11,6 +13,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @ApplicationScoped
@@ -116,4 +121,54 @@ public class ProfesorRepositoryImpl implements ProfesorRepository {
                 Profesor.class).setParameter("direccion", direccion).getResultList();
         return resultado;
     }
+
+    // criteria API
+
+    @Override
+    public List<Profesor> seleccionarTodosCriteria() {
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Profesor> myQuery = cb.createQuery(Profesor.class);
+        Root<Profesor> root = myQuery.from(Profesor.class);
+        myQuery.select(root);
+        TypedQuery<Profesor> query = this.em.createQuery(myQuery);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Profesor> seleccionarPorNombreCriteria(String nombre) {
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Profesor> myQuery = cb.createQuery(Profesor.class);
+        Root<Profesor> root = myQuery.from(Profesor.class);
+        myQuery.select(root).where(cb.equal(root.get("nombre"), nombre));
+        TypedQuery<Profesor> query = this.em.createQuery(myQuery);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Profesor> seleccionarDinamicoCriteria(String nombre, String telefono) {
+
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Profesor> myQuery = cb.createQuery(Profesor.class);
+        Root<Profesor> root = myQuery.from(Profesor.class);
+
+        List<Predicate> condiciones = new ArrayList<>();
+
+        if (nombre != null) {
+
+            Predicate p1 = cb.equal(root.get("nombre"), nombre);
+
+            condiciones.add(p1);
+        }
+        if (telefono != null) {
+
+            Predicate p2 = cb.equal(root.get("telefono"), telefono);
+
+            condiciones.add(p2);
+        }
+
+        myQuery.select(root).where(condiciones);
+        TypedQuery<Profesor> query = this.em.createQuery(myQuery);
+        return query.getResultList();
+    }
+
 }

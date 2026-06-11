@@ -76,4 +76,16 @@ public class ProfesorService {
         return this.profesorRepository.seleccionarProfesorPorDireccionNative(direccion);
     }
 
+    public List<Profesor> seleccionarTodosCriteria() {
+        return this.profesorRepository.seleccionarTodosCriteria();
+    }
+
+    public List<Profesor> seleccionarPorNombreCriteria(String nombre) {
+        return this.profesorRepository.seleccionarPorNombreCriteria(nombre);
+    }
+
+    public List<Profesor> seleccionarDinamicoCriteria(String nombre, String telefono) {
+        return this.profesorRepository.seleccionarDinamicoCriteria(nombre, telefono);
+    }
+
 }

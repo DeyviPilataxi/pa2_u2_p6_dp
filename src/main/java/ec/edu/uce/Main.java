@@ -3,8 +3,10 @@ package ec.edu.uce;
 import java.time.LocalDate;
 import java.util.List;
 
+import ec.edu.uce.application.service.CiudadanoService;
 import ec.edu.uce.application.service.EstudianteService;
 import ec.edu.uce.application.service.ProfesorService;
+import ec.edu.uce.domain.model.Ciudadano;
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.model.Profesor;
 import io.quarkus.runtime.Quarkus;
@@ -26,10 +28,13 @@ public class Main {
     @ApplicationScoped
     public static class App implements QuarkusApplication {
 
-        @Inject
-        private EstudianteService estudianteService;
+        // @Inject
+        // private EstudianteService estudianteService;
         // @Inject
         // private ProfesorService profesorService;
+
+        @Inject
+        private CiudadanoService ciudadanoService;
 
         @Override
 
@@ -279,46 +284,109 @@ public class Main {
              * 
              */
 
-            List<Estudiante> estudiantesCriteria = this.estudianteService.seleccionarTodosCriteria();
-            System.out.println("\nEstudiantes obtenidos con consulta Criteria API:");
-            for (Estudiante est : estudiantesCriteria) {
-                System.out.println(est);
-            }
+            /*
+             * List<Estudiante> estudiantesCriteria =
+             * this.estudianteService.seleccionarTodosCriteria();
+             * System.out.println("\nEstudiantes obtenidos con consulta Criteria API:");
+             * for (Estudiante est : estudiantesCriteria) {
+             * System.out.println(est);
+             * }
+             * 
+             * List<Estudiante> estudiantesPorNombreCriteria = this.estudianteService
+             * .seleccionarPorNombreCriteria("mishell");
+             * System.out.println("\nEstudiantes con el nombre 'mishell' Criteria:");
+             * for (Estudiante est : estudiantesPorNombreCriteria) {
+             * System.out.println(est);
+             * }
+             * System.out.println("--------------------------------------------------");
+             * List<Estudiante> estudiantesDinamicoCriteria = this.estudianteService
+             * .seleccionarDinamicoCriteria("mishell", "sinche");
+             * System.out.
+             * println("\nEstudiantes con el nombre 'mishell' y apellido 'sinche' Criteria:"
+             * );
+             * for (Estudiante est : estudiantesDinamicoCriteria) {
+             * System.out.println(est);
+             * }
+             * 
+             * List<Estudiante> estudiantesDinamicoCriteria2 = this.estudianteService
+             * .seleccionarDinamicoCriteria("mishell", null);
+             * System.out.
+             * println("\nEstudiantes con el nombre 'mishell' y apellido nulo Criteria:");
+             * for (Estudiante est : estudiantesDinamicoCriteria2) {
+             * System.out.println(est);
+             * }
+             * 
+             * List<Estudiante> estudiantesDinamicoCriteria3 = this.estudianteService
+             * .seleccionarDinamicoCriteria(null, "pilataxi");
+             * System.out.
+             * println("\nEstudiantes con el nombre nulo y apellido 'pilataxi' Criteria:");
+             * for (Estudiante est : estudiantesDinamicoCriteria3) {
+             * System.out.println(est);
+             * }
+             * 
+             * List<Estudiante> estudiantesDinamicoCriteria4 = this.estudianteService
+             * .seleccionarDinamicoCriteria(null, null);
+             * System.out.println("\nEstudiantes con el nombre y apellido nulos Criteria:");
+             * for (Estudiante est : estudiantesDinamicoCriteria4) {
+             * System.out.println(est);
+             * }
+             * 
+             */
+            /*
+             * List<Profesor> seleccionarTodosCriteria =
+             * this.profesorService.seleccionarTodosCriteria();
+             * System.out.println("\nProfesores obtenidos con consulta Criteria API:");
+             * for (Profesor prof : seleccionarTodosCriteria) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> seleccionarPorNombreCriteria = this.profesorService
+             * .seleccionarPorNombreCriteria("German Sinche");
+             * System.out.println("\nProfesores con el nombre 'German Sinche' Criteria:");
+             * for (Profesor prof : seleccionarPorNombreCriteria) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> seleccionarDinamicoCriteria = this.profesorService
+             * .seleccionarDinamicoCriteria("German Sinche", "0987654321");
+             * System.out.
+             * println("\nProfesores con el nombre 'German Sinche' y teléfono '0987654321' Criteria:"
+             * );
+             * for (Profesor prof : seleccionarDinamicoCriteria) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> seleccionarDinamicoCriteria2 = this.profesorService
+             * .seleccionarDinamicoCriteria("German Sinche", null);
+             * System.out.
+             * println("\nProfesores con el nombre 'German Sinche' y teléfono nulo Criteria:"
+             * );
+             * for (Profesor prof : seleccionarDinamicoCriteria2) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> seleccionarDinamicoCriteria3 = this.profesorService
+             * .seleccionarDinamicoCriteria(null, "0987654321");
+             * System.out.
+             * println("\nProfesores con el nombre nulo y teléfono '0987654321' Criteria:");
+             * for (Profesor prof : seleccionarDinamicoCriteria3) {
+             * System.out.println(prof);
+             * }
+             * 
+             * List<Profesor> seleccionarDinamicoCriteria4 = this.profesorService
+             * .seleccionarDinamicoCriteria(null, null);
+             * System.out.println("\nProfesores con el nombre y teléfono nulos Criteria:");
+             * for (Profesor prof : seleccionarDinamicoCriteria4) {
+             * System.out.println(prof);
+             * }
+             * 
+             */
 
-            List<Estudiante> estudiantesPorNombreCriteria = this.estudianteService
-                    .seleccionarPorNombreCriteria("mishell");
-            System.out.println("\nEstudiantes con el nombre 'mishell' Criteria:");
-            for (Estudiante est : estudiantesPorNombreCriteria) {
-                System.out.println(est);
-            }
-            System.out.println("--------------------------------------------------");
-            List<Estudiante> estudiantesDinamicoCriteria = this.estudianteService
-                    .seleccionarDinamicoCriteria("mishell", "sinche");
-            System.out.println("\nEstudiantes con el nombre 'mishell' y apellido 'sinche' Criteria:");
-            for (Estudiante est : estudiantesDinamicoCriteria) {
-                System.out.println(est);
-            }
-
-            List<Estudiante> estudiantesDinamicoCriteria2 = this.estudianteService
-                    .seleccionarDinamicoCriteria("mishell", null);
-            System.out.println("\nEstudiantes con el nombre 'mishell' y apellido nulo Criteria:");
-            for (Estudiante est : estudiantesDinamicoCriteria2) {
-                System.out.println(est);
-            }
-
-            List<Estudiante> estudiantesDinamicoCriteria3 = this.estudianteService
-                    .seleccionarDinamicoCriteria(null, "pilataxi");
-            System.out.println("\nEstudiantes con el nombre nulo y apellido 'pilataxi' Criteria:");
-            for (Estudiante est : estudiantesDinamicoCriteria3) {
-                System.out.println(est);
-            }
-
-            List<Estudiante> estudiantesDinamicoCriteria4 = this.estudianteService
-                    .seleccionarDinamicoCriteria(null, null);
-            System.out.println("\nEstudiantes con el nombre y apellido nulos Criteria:");
-            for (Estudiante est : estudiantesDinamicoCriteria4) {
-                System.out.println(est);
-            }
+            Ciudadano ciudadano = new Ciudadano();
+            ciudadano.setNombre("Juan");
+            LocalDate fechaNacimiento = LocalDate.of(1990, 5, 15);
+            ciudadano.setFechaNacimiento(fechaNacimiento);
+            this.ciudadanoService.guardar(ciudadano);
 
             return 0;
 
