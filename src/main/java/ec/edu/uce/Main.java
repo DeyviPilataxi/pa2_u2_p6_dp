@@ -6,9 +6,11 @@ import java.util.List;
 import ec.edu.uce.application.service.CiudadanoService;
 import ec.edu.uce.application.service.EstudianteService;
 import ec.edu.uce.application.service.ProfesorService;
+import ec.edu.uce.application.service.UsuarioService;
 import ec.edu.uce.domain.model.Ciudadano;
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.model.Profesor;
+import ec.edu.uce.domain.model.Usuario;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -33,8 +35,11 @@ public class Main {
         // @Inject
         // private ProfesorService profesorService;
 
+        // @Inject
+        // private CiudadanoService ciudadanoService;
+
         @Inject
-        private CiudadanoService ciudadanoService;
+        private UsuarioService usuarioService;
 
         @Override
 
@@ -382,12 +387,23 @@ public class Main {
              * 
              */
 
-            Ciudadano ciudadano = new Ciudadano();
-            ciudadano.setNombre("Juan");
-            LocalDate fechaNacimiento = LocalDate.of(1990, 5, 15);
-            ciudadano.setFechaNacimiento(fechaNacimiento);
-            this.ciudadanoService.guardar(ciudadano);
+            /*
+             * Ciudadano ciudadano = new Ciudadano();
+             * ciudadano.setNombre("Juan");
+             * LocalDate fechaNacimiento = LocalDate.of(1990, 5, 15);
+             * ciudadano.setFechaNacimiento(fechaNacimiento);
+             * this.ciudadanoService.guardar(ciudadano);
+             * 
+             * 
+             */
 
+            Usuario usuario = new Usuario();
+            usuario.setNombre("pedro");
+            usuario.setCedula("124457947");
+            usuario.setCorreo("pedrosjs@gmail.com");
+            this.usuarioService.guardar(usuario);
+
+            System.out.println(usuario);
             return 0;
 
         }
