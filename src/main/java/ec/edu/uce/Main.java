@@ -1,13 +1,16 @@
 package ec.edu.uce;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import ec.edu.uce.application.service.CiudadanoService;
+import ec.edu.uce.application.service.EmpleadoService;
 import ec.edu.uce.application.service.EstudianteService;
 import ec.edu.uce.application.service.ProfesorService;
 import ec.edu.uce.application.service.UsuarioService;
 import ec.edu.uce.domain.model.Ciudadano;
+import ec.edu.uce.domain.model.Empleado;
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.model.Profesor;
 import ec.edu.uce.domain.model.Usuario;
@@ -35,11 +38,14 @@ public class Main {
         // @Inject
         // private ProfesorService profesorService;
 
+        @Inject
+        private CiudadanoService ciudadanoService;
+
         // @Inject
-        // private CiudadanoService ciudadanoService;
+        // private UsuarioService usuarioService;
 
         @Inject
-        private UsuarioService usuarioService;
+        private EmpleadoService empleadoService;
 
         @Override
 
@@ -394,16 +400,38 @@ public class Main {
              * ciudadano.setFechaNacimiento(fechaNacimiento);
              * this.ciudadanoService.guardar(ciudadano);
              * 
-             * 
+             */
+            /*
+             * Usuario usuario = new Usuario();
+             * usuario.setNombre("pedro");
+             * usuario.setCedula("124457947");
+             * usuario.setCorreo("pedrosjs@gmail.com");
+             * this.usuarioService.guardar(usuario);
+             * System.out.println(usuario);
              */
 
-            Usuario usuario = new Usuario();
-            usuario.setNombre("pedro");
-            usuario.setCedula("124457947");
-            usuario.setCorreo("pedrosjs@gmail.com");
-            this.usuarioService.guardar(usuario);
+            Empleado em1 = new Empleado();
+            em1.setNombre("jose");
+            em1.setFechaIngreso(LocalDateTime.now());
+            em1.setSalario(500.00);
+            // em1.setCiudadano(ciudadano);
+            em1.setCiudadano(new Ciudadano());
+            this.empleadoService.guardar(em1);
 
-            System.out.println(usuario);
+            Ciudadano ciudadano2 = new Ciudadano();
+            ciudadano2.setNombre("Nuevo transaccion");
+            LocalDate fechaNacimiento2 = LocalDate.of(1990, 7, 12);
+            ciudadano2.setFechaNacimiento(fechaNacimiento2);
+
+            // ciudadano2.setNombre("Denis Nunez");
+
+            Empleado em2 = new Empleado();
+            em2.setNombre("mishell");
+            em2.setFechaIngreso(LocalDateTime.now());
+            em2.setSalario(null);
+            em1.setCiudadano(ciudadano2);
+            this.empleadoService.guardar(em1);
+
             return 0;
 
         }
