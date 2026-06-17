@@ -3,6 +3,7 @@ package ec.edu.uce.domain.model;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import io.quarkus.Generated;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Pasaporte {
     @Column(name = "pas_codigo_pais")
     private String codigoPais;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pas_usuario")
     private Usuario usuario;
 

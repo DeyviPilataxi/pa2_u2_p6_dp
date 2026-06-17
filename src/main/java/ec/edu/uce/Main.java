@@ -7,11 +7,13 @@ import java.util.List;
 import ec.edu.uce.application.service.CiudadanoService;
 import ec.edu.uce.application.service.EmpleadoService;
 import ec.edu.uce.application.service.EstudianteService;
+import ec.edu.uce.application.service.PasaporteService;
 import ec.edu.uce.application.service.ProfesorService;
 import ec.edu.uce.application.service.UsuarioService;
 import ec.edu.uce.domain.model.Ciudadano;
 import ec.edu.uce.domain.model.Empleado;
 import ec.edu.uce.domain.model.Estudiante;
+import ec.edu.uce.domain.model.Pasaporte;
 import ec.edu.uce.domain.model.Profesor;
 import ec.edu.uce.domain.model.Usuario;
 import io.quarkus.runtime.Quarkus;
@@ -38,14 +40,17 @@ public class Main {
         // @Inject
         // private ProfesorService profesorService;
 
+        // @Inject
+        // private CiudadanoService ciudadanoService;
+
         @Inject
-        private CiudadanoService ciudadanoService;
+        private UsuarioService usuarioService;
+
+        @Inject
+        private PasaporteService pasaporteService;
 
         // @Inject
-        // private UsuarioService usuarioService;
-
-        @Inject
-        private EmpleadoService empleadoService;
+        // private EmpleadoService empleadoService;
 
         @Override
 
@@ -410,27 +415,41 @@ public class Main {
              * System.out.println(usuario);
              */
 
-            Empleado em1 = new Empleado();
-            em1.setNombre("jose");
-            em1.setFechaIngreso(LocalDateTime.now());
-            em1.setSalario(500.00);
-            // em1.setCiudadano(ciudadano);
-            em1.setCiudadano(new Ciudadano());
-            this.empleadoService.guardar(em1);
+            /*
+             * Empleado em1 = new Empleado();
+             * em1.setNombre("jose");
+             * em1.setFechaIngreso(LocalDateTime.now());
+             * em1.setSalario(500.00);
+             * // em1.setCiudadano(ciudadano);
+             * em1.setCiudadano(new Ciudadano());
+             * this.empleadoService.guardar(em1);
+             * 
+             * Ciudadano ciudadano2 = new Ciudadano();
+             * ciudadano2.setNombre("Nuevo transaccion");
+             * LocalDate fechaNacimiento2 = LocalDate.of(1990, 7, 12);
+             * ciudadano2.setFechaNacimiento(fechaNacimiento2);
+             * 
+             * // ciudadano2.setNombre("Denis Nunez");
+             * 
+             * Empleado em2 = new Empleado();
+             * em2.setNombre("mishell");
+             * em2.setFechaIngreso(LocalDateTime.now());
+             * em2.setSalario(null);
+             * em1.setCiudadano(ciudadano2);
+             * this.empleadoService.guardar(em1);
+             * 
+             */
 
-            Ciudadano ciudadano2 = new Ciudadano();
-            ciudadano2.setNombre("Nuevo transaccion");
-            LocalDate fechaNacimiento2 = LocalDate.of(1990, 7, 12);
-            ciudadano2.setFechaNacimiento(fechaNacimiento2);
+            Usuario u1 = new Usuario();
+            u1.setNombre("Ariel");
+            u1.setCedula("1234493384");
+            u1.setCorreo("ariel@uce.edu.ec");
 
-            // ciudadano2.setNombre("Denis Nunez");
-
-            Empleado em2 = new Empleado();
-            em2.setNombre("mishell");
-            em2.setFechaIngreso(LocalDateTime.now());
-            em2.setSalario(null);
-            em1.setCiudadano(ciudadano2);
-            this.empleadoService.guardar(em1);
+            Pasaporte p1 = new Pasaporte();
+            p1.setNumeroPasaporte("345");
+            p1.setCodigoPais("593");
+            p1.setUsuario(u1);
+            this.pasaporteService.guardar(p1);
 
             return 0;
 
