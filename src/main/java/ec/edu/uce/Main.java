@@ -2,18 +2,22 @@ package ec.edu.uce;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import ec.edu.uce.application.service.CiudadanoService;
+import ec.edu.uce.application.service.ClienteService;
 import ec.edu.uce.application.service.EmpleadoService;
 import ec.edu.uce.application.service.EstudianteService;
 import ec.edu.uce.application.service.PasaporteService;
 import ec.edu.uce.application.service.ProfesorService;
 import ec.edu.uce.application.service.UsuarioService;
 import ec.edu.uce.domain.model.Ciudadano;
+import ec.edu.uce.domain.model.Cliente;
 import ec.edu.uce.domain.model.Empleado;
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.model.Pasaporte;
+import ec.edu.uce.domain.model.Pedido;
 import ec.edu.uce.domain.model.Profesor;
 import ec.edu.uce.domain.model.Usuario;
 import io.quarkus.runtime.Quarkus;
@@ -43,11 +47,14 @@ public class Main {
         // @Inject
         // private CiudadanoService ciudadanoService;
 
-        @Inject
-        private UsuarioService usuarioService;
+        // @Inject
+        // private UsuarioService usuarioService;
+
+        // @Inject
+        // private PasaporteService pasaporteService;
 
         @Inject
-        private PasaporteService pasaporteService;
+        private ClienteService clienteService;
 
         // @Inject
         // private EmpleadoService empleadoService;
@@ -440,16 +447,44 @@ public class Main {
              * 
              */
 
-            Usuario u1 = new Usuario();
-            u1.setNombre("Ariel");
-            u1.setCedula("1234493384");
-            u1.setCorreo("ariel@uce.edu.ec");
+            /*
+             * Usuario u1 = new Usuario();
+             * u1.setNombre("Ariel");
+             * u1.setCedula("1234493384");
+             * u1.setCorreo("ariel@uce.edu.ec");
+             * 
+             * Pasaporte p1 = new Pasaporte();
+             * p1.setNumeroPasaporte("345");
+             * p1.setCodigoPais("593");
+             * p1.setUsuario(u1);
+             * this.pasaporteService.guardar(p1);
+             * 
+             */
 
-            Pasaporte p1 = new Pasaporte();
-            p1.setNumeroPasaporte("345");
-            p1.setCodigoPais("593");
-            p1.setUsuario(u1);
-            this.pasaporteService.guardar(p1);
+            Cliente c = new Cliente();
+            c.setNombre("Deyvi");
+            c.setCedula("1751392854");
+
+            Pedido p1 = new Pedido();
+            p1.setTotal(Double.valueOf(10));
+            p1.setCliente(c);
+            p1.setFecha(LocalDate.of(2016, 01, 12));
+
+            Pedido p2 = new Pedido();
+            p2.setTotal(Double.valueOf(20));
+            p2.setCliente(c);
+            p2.setFecha(LocalDate.of(2017, 02, 14));
+
+            List<Pedido> pedidos = new ArrayList<>();
+
+            pedidos.add(p1);
+            pedidos.add(p2);
+
+            c.setPedidos(pedidos);
+
+            this.clienteService.guardar(c);
+
+            System.out.println(c);
 
             return 0;
 
