@@ -55,12 +55,12 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public List<Materia> getMeterias() {
-        return meterias;
+    public List<Materia> getMaterias() {
+        return materias;
     }
 
-    public void setMeterias(List<Materia> meterias) {
-        this.meterias = meterias;
+    public void setMeterias(List<Materia> materias) {
+        this.materias = materias;
     }
 
 }

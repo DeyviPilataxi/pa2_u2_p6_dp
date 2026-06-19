@@ -9,13 +9,16 @@ import ec.edu.uce.application.service.CiudadanoService;
 import ec.edu.uce.application.service.ClienteService;
 import ec.edu.uce.application.service.EmpleadoService;
 import ec.edu.uce.application.service.EstudianteService;
+import ec.edu.uce.application.service.PaisService;
 import ec.edu.uce.application.service.PasaporteService;
 import ec.edu.uce.application.service.ProfesorService;
 import ec.edu.uce.application.service.UsuarioService;
+import ec.edu.uce.domain.model.Ciudad;
 import ec.edu.uce.domain.model.Ciudadano;
 import ec.edu.uce.domain.model.Cliente;
 import ec.edu.uce.domain.model.Empleado;
 import ec.edu.uce.domain.model.Estudiante;
+import ec.edu.uce.domain.model.Pais;
 import ec.edu.uce.domain.model.Pasaporte;
 import ec.edu.uce.domain.model.Pedido;
 import ec.edu.uce.domain.model.Profesor;
@@ -53,9 +56,11 @@ public class Main {
         // @Inject
         // private PasaporteService pasaporteService;
 
-        @Inject
-        private ClienteService clienteService;
+        // @Inject
+        // private ClienteService clienteService;
 
+        @Inject
+        private PaisService paisService;
         // @Inject
         // private EmpleadoService empleadoService;
 
@@ -461,30 +466,53 @@ public class Main {
              * 
              */
 
-            Cliente c = new Cliente();
-            c.setNombre("Deyvi");
-            c.setCedula("1751392854");
+            /*
+             * Cliente c = new Cliente();
+             * c.setNombre("Deyvi");
+             * c.setCedula("1751392854");
+             * 
+             * Pedido p1 = new Pedido();
+             * p1.setTotal(Double.valueOf(10));
+             * p1.setCliente(c);
+             * p1.setFecha(LocalDate.of(2016, 01, 12));
+             * 
+             * Pedido p2 = new Pedido();
+             * p2.setTotal(Double.valueOf(20));
+             * p2.setCliente(c);
+             * p2.setFecha(LocalDate.of(2017, 02, 14));
+             * 
+             * List<Pedido> pedidos = new ArrayList<>();
+             * 
+             * pedidos.add(p1);
+             * pedidos.add(p2);
+             * 
+             * c.setPedidos(pedidos);
+             * 
+             * this.clienteService.guardar(c);
+             * 
+             * System.out.println(c);
+             * 
+             */
 
-            Pedido p1 = new Pedido();
-            p1.setTotal(Double.valueOf(10));
-            p1.setCliente(c);
-            p1.setFecha(LocalDate.of(2016, 01, 12));
+            Pais pais = new Pais();
+            pais.setCodigo("123");
+            pais.setNombre("Ecuador");
 
-            Pedido p2 = new Pedido();
-            p2.setTotal(Double.valueOf(20));
-            p2.setCliente(c);
-            p2.setFecha(LocalDate.of(2017, 02, 14));
+            Ciudad ciudad = new Ciudad();
+            ciudad.setNombre("Quito");
+            ciudad.setNumeroPoblacion("29203923");
 
-            List<Pedido> pedidos = new ArrayList<>();
+            Ciudad ciudad2 = new Ciudad();
+            ciudad2.setNombre("Quito");
+            ciudad2.setNumeroPoblacion("29203923");
 
-            pedidos.add(p1);
-            pedidos.add(p2);
+            List<Ciudad> ciudades = new ArrayList<>();
+            ciudades.add(ciudad);
+            ciudades.add(ciudad2);
 
-            c.setPedidos(pedidos);
+            pais.setCiudades(ciudades);
 
-            this.clienteService.guardar(c);
-
-            System.out.println(c);
+            this.paisService.guardar(pais);
 
             return 0;
 
