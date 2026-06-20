@@ -5,24 +5,29 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import ec.edu.uce.application.service.AlumnoService;
 import ec.edu.uce.application.service.CiudadanoService;
 import ec.edu.uce.application.service.ClienteService;
 import ec.edu.uce.application.service.EmpleadoService;
 import ec.edu.uce.application.service.EstudianteService;
+import ec.edu.uce.application.service.MateriaService;
 import ec.edu.uce.application.service.PaisService;
 import ec.edu.uce.application.service.PasaporteService;
 import ec.edu.uce.application.service.ProfesorService;
 import ec.edu.uce.application.service.UsuarioService;
+import ec.edu.uce.domain.model.Alumno;
 import ec.edu.uce.domain.model.Ciudad;
 import ec.edu.uce.domain.model.Ciudadano;
 import ec.edu.uce.domain.model.Cliente;
 import ec.edu.uce.domain.model.Empleado;
 import ec.edu.uce.domain.model.Estudiante;
+import ec.edu.uce.domain.model.Materia;
 import ec.edu.uce.domain.model.Pais;
 import ec.edu.uce.domain.model.Pasaporte;
 import ec.edu.uce.domain.model.Pedido;
 import ec.edu.uce.domain.model.Profesor;
 import ec.edu.uce.domain.model.Usuario;
+import ec.edu.uce.infraestructure.repository.AlumnoRepositoryImpl;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -56,11 +61,17 @@ public class Main {
         // @Inject
         // private PasaporteService pasaporteService;
 
-        // @Inject
-        // private ClienteService clienteService;
+        @Inject
+        private ClienteService clienteService;
 
         @Inject
-        private PaisService paisService;
+        private AlumnoService alumnoService;
+
+        @Inject
+        private MateriaService materiaService;
+
+        // @Inject
+        // private PaisService paisService;
         // @Inject
         // private EmpleadoService empleadoService;
 
@@ -465,8 +476,9 @@ public class Main {
              * this.pasaporteService.guardar(p1);
              * 
              */
-
             /*
+             * 
+             * 
              * Cliente c = new Cliente();
              * c.setNombre("Deyvi");
              * c.setCedula("1751392854");
@@ -493,27 +505,90 @@ public class Main {
              * System.out.println(c);
              * 
              */
+            /*
+             * Pais pais = new Pais();
+             * pais.setCodigo("123");
+             * pais.setNombre("Ecuador");
+             * 
+             * Ciudad ciudad = new Ciudad();
+             * ciudad.setNombre("Quito");
+             * ciudad.setNumeroPoblacion("29203923");
+             * 
+             * Ciudad ciudad2 = new Ciudad();
+             * ciudad2.setNombre("Quito");
+             * ciudad2.setNumeroPoblacion("29203923");
+             * 
+             * List<Ciudad> ciudades = new ArrayList<>();
+             * ciudades.add(ciudad);
+             * ciudades.add(ciudad2);
+             * 
+             * pais.setCiudades(ciudades);
+             * 
+             * this.paisService.guardar(pais);
+             * 
+             */
 
-            Pais pais = new Pais();
-            pais.setCodigo("123");
-            pais.setNombre("Ecuador");
+            /*
+             * Alumno a1 = new Alumno();
+             * a1.setNombre("Joel");
+             * 
+             * Materia m1 = new Materia();
+             * m1.setNombre("P. avanzada");
+             * m1.setNumeroCredito(4);
+             * 
+             * Materia m2 = new Materia();
+             * m2.setNombre("P. web");
+             * m2.setNumeroCredito(6);
+             * 
+             * List<Materia> listaMateria = List.of(m1, m2);
+             * 
+             * a1.setMaterias(listaMateria);
+             * 
+             * this.alumnoService.guardar(a1);
+             */
 
-            Ciudad ciudad = new Ciudad();
-            ciudad.setNombre("Quito");
-            ciudad.setNumeroPoblacion("29203923");
+            /*
+             * Materia m2 = new Materia();
+             * m2.setNombre("P. Distribuida");
+             * m2.setNumeroCredito(8);
+             * 
+             * Alumno a2 = new Alumno();
+             * a2.setNombre("Juan");
+             * a2.setMaterias(List.of(m2));
+             * 
+             * Alumno a3 = new Alumno();
+             * a3.setNombre("Jose");
+             * a3.setMaterias(List.of(m2));
+             * 
+             * m2.setAlumnos(List.of(a2, a3));
+             * 
+             * this.materiaService.guardar(m2);
+             * 
+             */
 
-            Ciudad ciudad2 = new Ciudad();
-            ciudad2.setNombre("Quito");
-            ciudad2.setNumeroPoblacion("29203923");
+            Integer idAlumnoBuscar = 1;
 
-            List<Ciudad> ciudades = new ArrayList<>();
-            ciudades.add(ciudad);
-            ciudades.add(ciudad2);
+            // 2. Buscamos al alumno usando el AlumnoService
+            Alumno alumnoConsultado = this.alumnoService.consultarId(idAlumnoBuscar);
 
-            pais.setCiudades(ciudades);
+            if (alumnoConsultado != null) {
+                System.out.println("=== Materias que está tomando el alumno: " + alumnoConsultado.getNombre() + " ===");
 
-            this.paisService.guardar(pais);
+                // 3. Verificamos que la lista de materias no esté nula o vacía
+                if (alumnoConsultado.getMaterias() != null && !alumnoConsultado.getMaterias().isEmpty()) {
 
+                    // 4. Recorremos las materias con un bucle for
+                    for (Materia materia : alumnoConsultado.getMaterias()) {
+                        System.out.println(
+                                "- Materia: " + materia.getNombre() + " | Créditos: " + materia.getNumeroCredito());
+                    }
+
+                } else {
+                    System.out.println("Este alumno no tiene materias registradas o asignadas.");
+                }
+            } else {
+                System.out.println("El alumno con ID " + idAlumnoBuscar + " no existe en la base de datos.");
+            }
             return 0;
 
         }
