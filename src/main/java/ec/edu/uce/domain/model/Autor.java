@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.arjuna.ats.internal.arjuna.objectstore.jdbc.drivers.postgres_driver;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,7 +36,7 @@ public class Autor {
     @Column(name = "auto_nacionalidad")
     private String nacionalidad;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "autor_libro", joinColumns = @JoinColumn(name = "liau_id_autor"), inverseJoinColumns = @JoinColumn(name = "liau_id_libro"))
     private List<Libro> libros;
 
@@ -76,6 +78,12 @@ public class Autor {
 
     public void setLibros(List<Libro> libros) {
         this.libros = libros;
+    }
+
+    @Override
+    public String toString() {
+        return "Autor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", nacionalidad=" + nacionalidad
+                + ", libros=" + libros + "]";
     }
 
 }

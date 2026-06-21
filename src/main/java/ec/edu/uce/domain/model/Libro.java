@@ -1,10 +1,15 @@
 package ec.edu.uce.domain.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -23,6 +28,9 @@ public class Libro {
 
     @Column(name = "libr_isbn")
     private String isbn;
+
+    @ManyToMany(mappedBy = "libros", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Autor> autores;
 
     public Integer getId() {
         return id;
@@ -46,6 +54,19 @@ public class Libro {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro [id=" + id + ", titulo=" + titulo + ", isbn=" + isbn + ", autores=" + autores + "]";
     }
 
 }

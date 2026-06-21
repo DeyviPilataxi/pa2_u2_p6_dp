@@ -18,6 +18,7 @@ public class MateriaService {
 
     }
 
+    @Transactional
     public Materia consultarId(Integer id) {
 
         return this.materiaRepository.consultarPorId(id);

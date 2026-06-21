@@ -6,21 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ec.edu.uce.application.service.AlumnoService;
+import ec.edu.uce.application.service.AuthorService;
 import ec.edu.uce.application.service.CiudadanoService;
 import ec.edu.uce.application.service.ClienteService;
 import ec.edu.uce.application.service.EmpleadoService;
 import ec.edu.uce.application.service.EstudianteService;
+import ec.edu.uce.application.service.LibroService;
 import ec.edu.uce.application.service.MateriaService;
 import ec.edu.uce.application.service.PaisService;
 import ec.edu.uce.application.service.PasaporteService;
 import ec.edu.uce.application.service.ProfesorService;
 import ec.edu.uce.application.service.UsuarioService;
 import ec.edu.uce.domain.model.Alumno;
+import ec.edu.uce.domain.model.Autor;
 import ec.edu.uce.domain.model.Ciudad;
 import ec.edu.uce.domain.model.Ciudadano;
 import ec.edu.uce.domain.model.Cliente;
 import ec.edu.uce.domain.model.Empleado;
 import ec.edu.uce.domain.model.Estudiante;
+import ec.edu.uce.domain.model.Libro;
 import ec.edu.uce.domain.model.Materia;
 import ec.edu.uce.domain.model.Pais;
 import ec.edu.uce.domain.model.Pasaporte;
@@ -61,19 +65,25 @@ public class Main {
         // @Inject
         // private PasaporteService pasaporteService;
 
-        @Inject
-        private ClienteService clienteService;
+        // @Inject
+        // private ClienteService clienteService;
 
-        @Inject
-        private AlumnoService alumnoService;
+        // @Inject
+        // private AlumnoService alumnoService;
 
-        @Inject
-        private MateriaService materiaService;
+        // @Inject
+        // private MateriaService materiaService;
 
         // @Inject
         // private PaisService paisService;
         // @Inject
         // private EmpleadoService empleadoService;
+
+        @Inject
+        private AuthorService authorService;
+
+        @Inject
+        private LibroService libroService;
 
         @Override
 
@@ -566,29 +576,90 @@ public class Main {
              * 
              */
 
-            Integer idAlumnoBuscar = 1;
+            /*
+             * Integer idAlumnoBuscar = 1;
+             * 
+             * // 2. Buscamos al alumno usando el AlumnoService
+             * Alumno alumnoConsultado = this.alumnoService.consultarId(idAlumnoBuscar);
+             * 
+             * if (alumnoConsultado != null) {
+             * System.out.println("=== Materias que está tomando el alumno: " +
+             * alumnoConsultado.getNombre() + " ===");
+             * 
+             * // 3. Verificamos que la lista de materias no esté nula o vacía
+             * if (alumnoConsultado.getMaterias() != null &&
+             * !alumnoConsultado.getMaterias().isEmpty()) {
+             * 
+             * // 4. Recorremos las materias con un bucle for
+             * for (Materia materia : alumnoConsultado.getMaterias()) {
+             * System.out.println(
+             * "- Materia: " + materia.getNombre() + " | Créditos: " +
+             * materia.getNumeroCredito());
+             * }
+             * 
+             * } else {
+             * System.out.println("Este alumno no tiene materias registradas o asignadas.");
+             * }
+             * } else {
+             * System.out.println("El alumno con ID " + idAlumnoBuscar +
+             * " no existe en la base de datos.");
+             * }
+             * 
+             */
 
-            // 2. Buscamos al alumno usando el AlumnoService
-            Alumno alumnoConsultado = this.alumnoService.consultarId(idAlumnoBuscar);
+            Autor a1 = new Autor();
+            a1.setNombre("fabricio");
+            a1.setApellido("Mendienta");
+            a1.setNacionalidad("Argentina");
 
-            if (alumnoConsultado != null) {
-                System.out.println("=== Materias que está tomando el alumno: " + alumnoConsultado.getNombre() + " ===");
+            Libro l1 = new Libro();
+            l1.setTitulo("cien dias");
+            l1.setIsbn("11");
 
-                // 3. Verificamos que la lista de materias no esté nula o vacía
-                if (alumnoConsultado.getMaterias() != null && !alumnoConsultado.getMaterias().isEmpty()) {
+            Libro l2 = new Libro();
+            l2.setTitulo("fantasias");
+            l2.setIsbn("12");
 
-                    // 4. Recorremos las materias con un bucle for
-                    for (Materia materia : alumnoConsultado.getMaterias()) {
-                        System.out.println(
-                                "- Materia: " + materia.getNombre() + " | Créditos: " + materia.getNumeroCredito());
-                    }
+            List<Libro> libros = List.of(l1, l2);
+            a1.setLibros(libros);
 
-                } else {
-                    System.out.println("Este alumno no tiene materias registradas o asignadas.");
-                }
+            this.authorService.guardar(a1);
+
+            Libro l3 = new Libro();
+            l3.setTitulo("vuelta al muno en 100 dias");
+            l3.setIsbn("45");
+
+            Autor a3 = new Autor();
+            a3.setNombre("Pablo");
+            a3.setApellido("Benitez");
+            a3.setNacionalidad("Peru");
+
+            Autor a4 = new Autor();
+            a4.setNombre("Mishell");
+            a4.setApellido("Sinche");
+            a4.setNacionalidad("Ecuatoriana");
+
+            List<Autor> autores = List.of(a3, a4);
+            l3.setAutores(autores);
+
+            this.libroService.guardar(l3);
+
+            Autor autorConsultado = this.authorService.consultarId(1);
+
+            if (autorConsultado != null) {
+                System.out.println("El autor SÍ existe en la base de datos.");
             } else {
-                System.out.println("El alumno con ID " + idAlumnoBuscar + " no existe en la base de datos.");
+                System.out.println("No se encontró ningún autor con ese Id:");
             }
+
+            Libro libroConsultado = this.libroService.consultarId(1);
+
+            if (libroConsultado != null) {
+                System.out.println("El libro SÍ existe en la base de datos.");
+            } else {
+                System.out.println("No se encontró ningún libro con ese Id:");
+            }
+
             return 0;
 
         }

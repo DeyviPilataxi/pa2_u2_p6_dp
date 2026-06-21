@@ -17,10 +17,10 @@ public class AlumnoService {
 
     }
 
-    public Alumno consultarId(Integer idAlumnoBuscar) {
+    // public Alumno consultarId(Integer id) {
 
-        return this.alumnoRepository.consultarId(id);
+    // return this.alumnoRepository(this.consultarId(id));
 
-    }
+    // }
 
 }
