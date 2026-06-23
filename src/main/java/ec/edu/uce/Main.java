@@ -1,5 +1,6 @@
 package ec.edu.uce;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import ec.edu.uce.application.service.AlumnoService;
 import ec.edu.uce.application.service.AuthorService;
 import ec.edu.uce.application.service.CiudadanoService;
 import ec.edu.uce.application.service.ClienteService;
+import ec.edu.uce.application.service.CuentaBancariaService;
 import ec.edu.uce.application.service.EmpleadoService;
 import ec.edu.uce.application.service.EstudianteService;
 import ec.edu.uce.application.service.LibroService;
@@ -16,12 +18,14 @@ import ec.edu.uce.application.service.MateriaService;
 import ec.edu.uce.application.service.PaisService;
 import ec.edu.uce.application.service.PasaporteService;
 import ec.edu.uce.application.service.ProfesorService;
+import ec.edu.uce.application.service.TransferenciaService;
 import ec.edu.uce.application.service.UsuarioService;
 import ec.edu.uce.domain.model.Alumno;
 import ec.edu.uce.domain.model.Autor;
 import ec.edu.uce.domain.model.Ciudad;
 import ec.edu.uce.domain.model.Ciudadano;
 import ec.edu.uce.domain.model.Cliente;
+import ec.edu.uce.domain.model.CuentaBancaria;
 import ec.edu.uce.domain.model.Empleado;
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.model.Libro;
@@ -30,6 +34,7 @@ import ec.edu.uce.domain.model.Pais;
 import ec.edu.uce.domain.model.Pasaporte;
 import ec.edu.uce.domain.model.Pedido;
 import ec.edu.uce.domain.model.Profesor;
+import ec.edu.uce.domain.model.Transferencia;
 import ec.edu.uce.domain.model.Usuario;
 import ec.edu.uce.infraestructure.repository.AlumnoRepositoryImpl;
 import io.quarkus.runtime.Quarkus;
@@ -79,11 +84,17 @@ public class Main {
         // @Inject
         // private EmpleadoService empleadoService;
 
-        @Inject
-        private AuthorService authorService;
+        // @Inject
+        // private AuthorService authorService;
+
+        // @Inject
+        // private LibroService libroService;
 
         @Inject
-        private LibroService libroService;
+        private CuentaBancariaService cuentaBancariaService;
+
+        @Inject
+        private TransferenciaService transferenciaService;
 
         @Override
 
@@ -607,59 +618,101 @@ public class Main {
              * 
              */
 
-            Autor a1 = new Autor();
-            a1.setNombre("fabricio");
-            a1.setApellido("Mendienta");
-            a1.setNacionalidad("Argentina");
+            /*
+             * Autor a1 = new Autor();
+             * a1.setNombre("fabricio");
+             * a1.setApellido("Mendienta");
+             * a1.setNacionalidad("Argentina");
+             * 
+             * Libro l1 = new Libro();
+             * l1.setTitulo("cien dias");
+             * l1.setIsbn("11");
+             * 
+             * Libro l2 = new Libro();
+             * l2.setTitulo("fantasias");
+             * l2.setIsbn("12");
+             * 
+             * List<Libro> libros = List.of(l1, l2);
+             * a1.setLibros(libros);
+             * 
+             * this.authorService.guardar(a1);
+             * 
+             * Libro l3 = new Libro();
+             * l3.setTitulo("vuelta al muno en 100 dias");
+             * l3.setIsbn("45");
+             * 
+             * Autor a3 = new Autor();
+             * a3.setNombre("Pablo");
+             * a3.setApellido("Benitez");
+             * a3.setNacionalidad("Peru");
+             * 
+             * Autor a4 = new Autor();
+             * a4.setNombre("Mishell");
+             * a4.setApellido("Sinche");
+             * a4.setNacionalidad("Ecuatoriana");
+             * 
+             * List<Autor> autores = List.of(a3, a4);
+             * l3.setAutores(autores);
+             * 
+             * this.libroService.guardar(l3);
+             * 
+             * Autor autorConsultado = this.authorService.consultarId(1);
+             * 
+             * if (autorConsultado != null) {
+             * System.out.println("El autor SÍ existe en la base de datos.");
+             * } else {
+             * System.out.println("No se encontró ningún autor con ese Id:");
+             * }
+             * 
+             * Libro libroConsultado = this.libroService.consultarId(1);
+             * 
+             * if (libroConsultado != null) {
+             * System.out.println("El libro SÍ existe en la base de datos.");
+             * } else {
+             * System.out.println("No se encontró ningún libro con ese Id:");
+             * }
+             * 
+             */
 
-            Libro l1 = new Libro();
-            l1.setTitulo("cien dias");
-            l1.setIsbn("11");
+            CuentaBancaria cuenta1 = new CuentaBancaria();
+            cuenta1.setNumeroCuenta("000111222");
+            cuenta1.setSaldo(new BigDecimal("100.00"));
+            cuentaBancariaService.guardarCuenta(cuenta1);
 
-            Libro l2 = new Libro();
-            l2.setTitulo("fantasias");
-            l2.setIsbn("12");
+            CuentaBancaria cuenta2 = new CuentaBancaria();
+            cuenta2.setNumeroCuenta("333444555");
+            cuenta2.setSaldo(new BigDecimal("20.00"));
+            cuentaBancariaService.guardarCuenta(cuenta2);
 
-            List<Libro> libros = List.of(l1, l2);
-            a1.setLibros(libros);
+            System.out.println("Cuentas  creadas con éxito.");
+            System.out.println("----------------------------------------");
 
-            this.authorService.guardar(a1);
+            Integer idOrigen = 1;
+            Integer idDestino = 2;
+            BigDecimal montoATransferir = new BigDecimal("35.50");
 
-            Libro l3 = new Libro();
-            l3.setTitulo("vuelta al muno en 100 dias");
-            l3.setIsbn("45");
+            System.out.println("Iniciando transferencia de " + montoATransferir + " desde Cuenta: " + idOrigen
+                    + " hacia Cuenta: " + idDestino);
 
-            Autor a3 = new Autor();
-            a3.setNombre("Pablo");
-            a3.setApellido("Benitez");
-            a3.setNacionalidad("Peru");
+            CuentaBancaria origen = cuentaBancariaService.buscarPorId(idOrigen);
+            CuentaBancaria destino = cuentaBancariaService.buscarPorId(idDestino);
 
-            Autor a4 = new Autor();
-            a4.setNombre("Mishell");
-            a4.setApellido("Sinche");
-            a4.setNacionalidad("Ecuatoriana");
+            if (origen != null && destino != null) {
 
-            List<Autor> autores = List.of(a3, a4);
-            l3.setAutores(autores);
+                cuentaBancariaService.actualizar(origen, destino, montoATransferir);
 
-            this.libroService.guardar(l3);
+                transferenciaService.registrarTransferencia(origen, destino, montoATransferir);
 
-            Autor autorConsultado = this.authorService.consultarId(1);
+                System.out.println("----------------------------------------");
+                System.out.println("saldos actualizados");
+                System.out.println("Cuenta Origen (" + origen.getNumeroCuenta() + ") Nuevo Saldo: "
+                        + cuentaBancariaService.buscarPorId(idOrigen).getSaldo());
+                System.out.println("Cuenta Destino (" + destino.getNumeroCuenta() + ") Nuevo Saldo: "
+                        + cuentaBancariaService.buscarPorId(idDestino).getSaldo());
 
-            if (autorConsultado != null) {
-                System.out.println("El autor SÍ existe en la base de datos.");
             } else {
-                System.out.println("No se encontró ningún autor con ese Id:");
+                System.out.println(" No se encontraron las cuentas en la base de datos.");
             }
-
-            Libro libroConsultado = this.libroService.consultarId(1);
-
-            if (libroConsultado != null) {
-                System.out.println("El libro SÍ existe en la base de datos.");
-            } else {
-                System.out.println("No se encontró ningún libro con ese Id:");
-            }
-
             return 0;
 
         }
